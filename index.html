@@ -18,7 +18,11 @@
             <div class="left" style="background-color:#aaa;">
                 <button type="button" class="collapsible">Open Collapsible</button>
                 <div class="content">
-                    <a>First article</a>
+                    <button onclick="openLorem()">Lorem ipsum</button>
+                    <button onclick="openFarAway()">Far away</button>
+                    <button onclick="openCicero()">Cicero</button>
+                    <button onclick="openWether()">Wether</button>  
+                    <button onclick="openPangram()">Pangram</button>      
                 </div>
             </div>
             <div class="right" style="background-color:#ccc;">
@@ -71,9 +75,8 @@
         <p>Created by Misho</p>
     </footer>
     <script>
-        var button = document.getElementsByClassName("collapsible");
-        var i;
-        for (i = 0; i < coll.length; i++) {
+        let button = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < button.length; i++) {
             button[i].addEventListener("click", function () {
                 this.classList.toggle("active");
                 var content = this.nextElementSibling;
@@ -83,6 +86,32 @@
                     content.style.display = "block";
                 }
             });
+        }
+
+        let loremArticle = document.getElementById("firstSection");
+        let farAwayArticle = document.getElementById("secondSection");
+        let ciceroArticle = document.getElementById("thirdSection");
+        let wetherArticle = document.getElementById("fourthSection");
+        let pangramArticle = document.getElementById("fifthSection");
+
+        let openLorem = () => {
+            loremArticle.scrollIntoView();
+        }
+
+        let openFarAway = () => {
+            farAwayArticle.scrollIntoView();
+        }
+
+        let openCicero = () => {
+            ciceroArticle.scrollIntoView();
+        }
+
+        let openWether = () => {
+            wetherArticle.scrollIntoView();
+        }
+
+        let openPangram = () => {
+            pangramArticle.scrollIntoView();
         }
     </script>
 </body>

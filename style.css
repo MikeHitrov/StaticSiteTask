@@ -37,6 +37,20 @@ body{
     height: 4rem;
 }
 
+* {
+    box-sizing: border-box;
+  }
+  
+.row {
+    display: flex;
+}
+  
+.column {
+    flex: 50%;
+    height: 100rem;
+    padding: 1rem;
+}
+
 footer {
     position: fixed;
     left: 0;

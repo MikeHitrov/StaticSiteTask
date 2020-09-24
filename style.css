@@ -41,14 +41,22 @@ body{
     box-sizing: border-box;
   }
   
-.row {
-    display: flex;
-}
+.row, html, body {
+    height: 98%;
+} 
   
-.column {
-    flex: 50%;
+.left {
+    float: left;
+    width: 50%;
     height: 100rem;
-    padding: 1rem;
+    overflow: scroll;
+}
+
+.right {
+    float: left;
+    width: 50%;
+    height: 100rem;
+    overflow: scroll;
 }
 
 footer {

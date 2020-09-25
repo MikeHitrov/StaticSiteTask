@@ -1,16 +1,15 @@
 let button = document.getElementsByClassName("collapsible");
 
-for (let i = 0; i < button.length; i++) {
-    button[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    });
-}
+button[0].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var content = document.getElementsByClassName("content");
+
+    if (content[0].style.display === "block") {
+        content[0].style.display = "none";
+    } else {
+        content[0].style.display = "block";
+    }
+});
 
 let loremArticle = document.getElementById("loremArticle");
 let farAwayArticle = document.getElementById("farAwayArticle");

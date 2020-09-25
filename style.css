@@ -49,7 +49,7 @@ body{
 .left, .right {
     float: left;
     width: 50%;
-    height: 100%;
+    height: 100vh;
     overflow: scroll;
     margin-top: 4rem;
 }

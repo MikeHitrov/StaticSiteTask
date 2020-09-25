@@ -16,7 +16,7 @@
     <main>
         <div class="row">
             <div class="left" style="background-color:#aaa;">
-                <button type="button" class="collapsible">Open Collapsible</button>
+                <button type="button" class="collapsible">Open/Close</button>
                 <div class="content">
                     <button onclick="openLorem()">Lorem ipsum</button>
                     <button onclick="openFarAway()">Far away</button>
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="right" style="background-color:#ccc;">
-                <section id="firstSection">
+                <section id="loremArticle">
                     <img src="https://blogging.com/wp-content/uploads/2018/08/lorem-ipsum-fi-2.png">
                     <h2>Lorem ipsum</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae tellus lorem. Aenean
@@ -35,7 +35,7 @@
                         tincidunt odio. Praesent quis venenatis elit. In tincidunt ipsum mauris, a aliquet sapien
                         sollicitudin quis. Curabitur tempor mi elit, vel ullamcorper eros semper ut.</p>
                 </section>
-                <section id="secondSection">
+                <section id="farAwayArticle">
                     <img src="https://i.ytimg.com/vi/86saJZ4VWws/maxresdefault.jpg">
                     <h2>Far away</h2>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
@@ -43,7 +43,7 @@
                         a large language ocean. A small river named Duden flows by their place and supplies it with the
                         necessary</p>
                 </section>
-                <section id="thirdSection">
+                <section id="ciceroArticle">
                     <img
                         src="https://www.thoughtco.com/thmb/fRtoMog7kXs4MOsqHVHBavlRxvU=/3244x2433/smart/filters:no_upscale()/Cicero_Rome_Palace_of_Justice-9a15cb9d2a0e4d0a9d0cf2786629dd1f.jpg">
                     <h2>Cicero</h2>
@@ -52,7 +52,7 @@
                         dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
                         fugit, sed quia consequuntur magni dolores eos qui</p>
                 </section>
-                <section id="fourthSection">
+                <section id="wetherArticle">
                     <img
                         src="https://previews.123rf.com/images/tuulum/tuulum0807/tuulum080700014/3252719-the-wether-with-big-coiled-horns-and-sheep.jpg">
                     <h2>Wether</h2>
@@ -60,7 +60,7 @@
                         which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot,
                         which was created for the bliss of souls like mine. I am so happy, my</p>
                 </section>
-                <section id="fifthSection">
+                <section id="pangramArticle">
                     <img
                         src="https://storage.googleapis.com/ltkcms.appspot.com/fs/yd/images/cover/30261.pangram-lazy-dog.base?v=1568351432">
                     <h2>Pangram</h2>
@@ -88,11 +88,11 @@
             });
         }
 
-        let loremArticle = document.getElementById("firstSection");
-        let farAwayArticle = document.getElementById("secondSection");
-        let ciceroArticle = document.getElementById("thirdSection");
-        let wetherArticle = document.getElementById("fourthSection");
-        let pangramArticle = document.getElementById("fifthSection");
+        let loremArticle = document.getElementById("loremArticle");
+        let farAwayArticle = document.getElementById("farAwayArticle");
+        let ciceroArticle = document.getElementById("ciceroArticle");
+        let wetherArticle = document.getElementById("wetherArticle");
+        let pangramArticle = document.getElementById("pangramArticle");
 
         let openLorem = () => {
             loremArticle.scrollIntoView();

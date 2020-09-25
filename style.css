@@ -67,7 +67,7 @@ section > img {
     border-radius: 3rem;  
 }
 
- .collapsible {
+.collapsible {
     background-color: #333;
     color: #ddd;
     cursor: pointer;
@@ -77,9 +77,9 @@ section > img {
     text-align: center;
     outline: none;
     font-size: 1.5rem;
-  }
-  
-  .content {
+}
+
+.content {
     padding: 0 1.5rem;
     display: none;
     overflow: hidden;
@@ -87,7 +87,7 @@ section > img {
     color: #000000;
     font-size: 2rem;
     text-align: center;
-  } 
+} 
 
 button {
     background-color: #000000;
@@ -108,7 +108,6 @@ button:hover {
 }
 
 footer {
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;

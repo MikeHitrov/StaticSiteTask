@@ -1,12 +1,21 @@
-let button = document.getElementsByClassName("collapsible");
+let openBtn = document.getElementsByClassName("openSideNav")[0];
+let closeBtn = document.getElementsByClassName("closeBtn")[0];
 
-button[0].addEventListener("click", function () {
-    this.classList.toggle("active");
-    var content = document.getElementsByClassName("content");
+const showNav = () => {
+    document.querySelector(".sideNav").style.width = "300px";
+    document.querySelector('.main-content').style.marginLeft = "300px";
+}
 
-    if (content[0].style.display === "block") {
-        content[0].style.display = "none";
-    } else {
-        content[0].style.display = "block";
-    }
+const hideNav = () => {
+    document.querySelector(".sideNav").style.width = "0";
+    document.querySelector('.main-content').style.marginLeft = "0px";
+}
+
+openBtn.addEventListener("click", () => {
+    console.log(1)
+    showNav();
+});
+
+closeBtn.addEventListener("click", () => {
+    hideNav();
 });

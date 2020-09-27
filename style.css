@@ -2,6 +2,10 @@ body{
     margin: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 #navbar {
     position: fixed;
     top: 0%;
@@ -15,7 +19,7 @@ body{
 #navbar a {
     float: right;
     display: block;
-    color: #f2f2f2;
+    color: #F2F2F2;
     text-align: center;
     padding: 1rem 1rem;
     text-decoration: none;
@@ -23,13 +27,13 @@ body{
 }
   
 #navbar a:hover {
-    background-color: #ddd;
+    background-color: #DDD;
     color: black;
 }
   
 #navbar a.active {
     background-color: #4CAF50;
-    color: white;
+    color: #FFFFFF;
 }
 
 #logo { 
@@ -38,22 +42,18 @@ body{
     height: 2rem;
 }
 
-* {
-    box-sizing: border-box;
-  }
-
 main{
     margin-top: 4rem;
 }
 
-main > div {
+.article {
     border-style: outset;
     text-align: center;
     color: #000000;  
     font-size: 2rem;
 }
 
-main > div > img {
+.article > img {
     width: 25rem;
     height: 25rem;
     border-radius: 3rem;  
@@ -61,7 +61,7 @@ main > div > img {
 
 .openSideNav {
     background-color: #333;
-    color: #ddd;
+    color: #DDD;
     cursor: pointer;
     padding: 1.5rem;
     width: 100%;
@@ -75,7 +75,7 @@ main > div > img {
     padding: 0 1.5rem;
     display: none;
     overflow: hidden;
-    background-color: #ddd;
+    background-color: #DDD;
     color: #000000;
     font-size: 2rem;
     text-align: center;
@@ -88,7 +88,7 @@ main > div > img {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(46, 218, 195);
+    background-color: #0084FF;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -98,14 +98,9 @@ main > div > img {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #000000;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #FFFFFF;
     display: block;
     transition: 0.3s;
-}
-
-.sidenav a:hover {
-    color: #f1f1f1;
 }
 
 .sideNav .closeBtn {

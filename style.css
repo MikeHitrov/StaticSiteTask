@@ -91,7 +91,7 @@ main{
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
-    }
+}
 
 .sideNav a {
     padding: 8px 8px 8px 32px;
@@ -108,6 +108,9 @@ main{
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    background-color: transparent;
+    border: none;
+    color: #FFFFFF;
 }
 
 footer {

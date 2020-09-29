@@ -1,5 +1,5 @@
 let openBtn = document.getElementsByClassName("openSideNav")[0];
-let closeBtn = document.getElementsByClassName("closeBtn")[0];
+let closeBtn = document.getElementById("closeBtn");
 
 const showNav = () => {
     document.querySelector(".sideNav").style.width = "20%";

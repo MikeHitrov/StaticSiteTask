@@ -9,12 +9,12 @@
 <body>
     <header id="navbar">
         <a href="index.html" style="float: left;"><img src="https://static.dezeen.com/uploads/2019/04/ikea-logo-new-hero-1.jpg" id="logo"></a>
+        <a><button type="button" class="openSideNav">Open sidebar</button></a>
         <a href="https://github.com/MikeHitrov/StaticSiteTask">Code</a>
         <a href="https://www.ikea.bg/">Ikea</a>
         <a href="https://www.ikea.bg/products/decoration/">Decoration</a>
     </header>
     <main>
-        <button type="button" class="openSideNav">Open sidebar</button>
         <nav class="sideNav">
             <a href="#" class="closeBtn">&times;</a>
             <a href="#loremArticle">Lorem ipsum</a><br>
@@ -23,45 +23,47 @@
             <a href="#wetherArticle">Wether</a><br>
             <a href="#pangramArticle">Pangram</a>       
         </nav>
-        <div class="article" id="loremArticle">
-            <img src="https://blogging.com/wp-content/uploads/2018/08/lorem-ipsum-fi-2.png" alt="Lorem image">
-            <h2>Lorem ipsum</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae tellus lorem. Aenean
-                dignissim, justo ut tincidunt consectetur, erat turpis congue lectus, ut sodales lorem nisl eget
-                lacus. Etiam varius nisl quis elit efficitur porttitor. Suspendisse id ullamcorper ligula, id
-                tincidunt odio. Praesent quis venenatis elit. In tincidunt ipsum mauris, a aliquet sapien
-                sollicitudin quis. Curabitur tempor mi elit, vel ullamcorper eros semper ut.</p>
-        </div>
-        <div class="article" id="farAwayArticle">
-            <img src="https://i.ytimg.com/vi/86saJZ4VWws/maxresdefault.jpg" alt="Far Away image">
-            <h2>Far away</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
-                a large language ocean. A small river named Duden flows by their place and supplies it with the
-                necessary</p>
-        </div>
-        <div class="article" id="ciceroArticle">
-            <img src="https://www.thoughtco.com/thmb/fRtoMog7kXs4MOsqHVHBavlRxvU=/3244x2433/smart/filters:no_upscale()/Cicero_Rome_Palace_of_Justice-9a15cb9d2a0e4d0a9d0cf2786629dd1f.jpg" alt="Cicero image">
-            <h2>Cicero</h2>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-                fugit, sed quia consequuntur magni dolores eos qui</p>
-        </div>
-        <div class="article" id="wetherArticle">
-            <img src="https://previews.123rf.com/images/tuulum/tuulum0807/tuulum080700014/3252719-the-wether-with-big-coiled-horns-and-sheep.jpg" alt="Wether image">
-            <h2>Wether</h2>
-            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring
-                which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot,
-                which was created for the bliss of souls like mine. I am so happy, my</p>
-        </div>
-        <div class="article" id="pangramArticle">
-            <img src="https://storage.googleapis.com/ltkcms.appspot.com/fs/yd/images/cover/30261.pangram-lazy-dog.base?v=1568351432" alt="Pangram image">
-            <h2>Pangram</h2>
-            <p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz
-                graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex!
-                Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens</p>
-        </div>
+        <div id="mainContent">
+            <div class="article" id="loremArticle">
+                <img src="https://blogging.com/wp-content/uploads/2018/08/lorem-ipsum-fi-2.png" alt="Lorem image">
+                <h2>Lorem ipsum</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae tellus lorem. Aenean
+                    dignissim, justo ut tincidunt consectetur, erat turpis congue lectus, ut sodales lorem nisl eget
+                    lacus. Etiam varius nisl quis elit efficitur porttitor. Suspendisse id ullamcorper ligula, id
+                    tincidunt odio. Praesent quis venenatis elit. In tincidunt ipsum mauris, a aliquet sapien
+                    sollicitudin quis. Curabitur tempor mi elit, vel ullamcorper eros semper ut.</p>
+            </div>
+            <div class="article" id="farAwayArticle">
+                <img src="https://i.ytimg.com/vi/86saJZ4VWws/maxresdefault.jpg" alt="Far Away image">
+                <h2>Far away</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
+                    live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics,
+                    a large language ocean. A small river named Duden flows by their place and supplies it with the
+                    necessary</p>
+            </div>
+            <div class="article" id="ciceroArticle">
+                <img src="https://www.thoughtco.com/thmb/fRtoMog7kXs4MOsqHVHBavlRxvU=/3244x2433/smart/filters:no_upscale()/Cicero_Rome_Palace_of_Justice-9a15cb9d2a0e4d0a9d0cf2786629dd1f.jpg" alt="Cicero image">
+                <h2>Cicero</h2>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
+                    fugit, sed quia consequuntur magni dolores eos qui</p>
+            </div>
+            <div class="article" id="wetherArticle">
+                <img src="https://previews.123rf.com/images/tuulum/tuulum0807/tuulum080700014/3252719-the-wether-with-big-coiled-horns-and-sheep.jpg" alt="Wether image">
+                <h2>Wether</h2>
+                <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring
+                    which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot,
+                    which was created for the bliss of souls like mine. I am so happy, my</p>
+            </div>
+            <div class="article" id="pangramArticle">
+                <img src="https://storage.googleapis.com/ltkcms.appspot.com/fs/yd/images/cover/30261.pangram-lazy-dog.base?v=1568351432" alt="Pangram image">
+                <h2>Pangram</h2>
+                <p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz
+                    graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex!
+                    Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens</p>
+            </div>
+        </div>    
     </main>
     <footer>
         <p>Created by Misho</p>

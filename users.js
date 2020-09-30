@@ -177,9 +177,13 @@ const getDb = () => {
 };
 
 const deleteUser = (user) => {
-  tableBody.removeChild(trMap[user.id].row);
+  let deleteModal = confirm(`Do you want to delete user ${user.name}?`);
 
-  let database = getDb();
-  let users = database.users.filter((u) => u.id !== user.id);
-  localStorage.setItem("database", JSON.stringify({ ...database, users }));
+  if (deleteModal) {
+    tableBody.removeChild(trMap[user.id].row);
+
+    let database = getDb();
+    let users = database.users.filter((u) => u.id !== user.id);
+    localStorage.setItem("database", JSON.stringify({ ...database, users }));
+  }
 };

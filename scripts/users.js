@@ -63,6 +63,10 @@ const getUsers = () => {
   return JSON.parse(localStorage.getItem("database")).users;
 };
 
+const sanitize = (string) => {
+  return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+
 const addUserToTable = (user) => {
   let tableRow = document.createElement("tr");
 
@@ -88,11 +92,11 @@ const addUserToTable = (user) => {
   editTd.appendChild(editButton);
   deleteTd.appendChild(deleteButton);
 
-  idTd.innerHTML = user.id;
-  nameTd.innerHTML = user.name;
-  emailTd.innerHTML = user.email;
-  ageTd.innerHTML = user.age;
-  addressTd.innerHTML = user.address;
+  idTd.innerHTML = sanitize(user.id);
+  nameTd.innerHTML = sanitize(user.name);
+  emailTd.innerHTML = sanitize(user.email);
+  ageTd.innerHTML = sanitize(user.age.toString());
+  addressTd.innerHTML = sanitize(user.address);
 
   tableRow.appendChild(idTd);
   tableRow.appendChild(nameTd);
@@ -118,7 +122,6 @@ getUsers().forEach((usersObj) => {
 });
 
 document.getElementById("usersTable").onclick = (event) => {
-
   if (event.target.id !== "editButton" && event.target.id == "deleteButton") {
     return;
   }
@@ -189,11 +192,11 @@ const loadUserToForm = (user) => {
   //Loads the data from the local storage, because the form doesn't update until the page is refreshed.
   let userData = getUsers().find((u) => u.id === user.id);
 
-  form.id.value = userData.id;
-  form.name.value = userData.name;
-  form.email.value = userData.email;
-  form.age.value = userData.age;
-  form.address.value = userData.address;
+  form.id.value = sanitize(userData.id);
+  form.name.value = sanitize(userData.name);
+  form.email.value = sanitize(userData.email);
+  form.age.value = sanitize(userData.age.toString());
+  form.address.value = sanitize(userData.address);
 
   form.scrollIntoView();
 };

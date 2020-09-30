@@ -1,4 +1,4 @@
-var users = `{
+let database = `{
     "users": [
         {
             "id": 1234567890,
@@ -38,39 +38,83 @@ var users = `{
     ]
 }`;
 
-localStorage.setItem("users", users);
+if(!localStorage.getItem('database')){
+    localStorage.setItem("database", database);
+}
 
 let tableBody = document
   .getElementById("usersTable")
   .getElementsByTagName("tbody")[0];
 
 const getUsers = async () => {
-  let usersJSON = localStorage.getItem(users) || users;
+  let usersJSON = localStorage.getItem("database") || database;
   return JSON.parse(usersJSON).users;
 };
 
+const addUserToTable = (user) => {
+  let tableRow = document.createElement("tr");
+
+  let idTd = document.createElement("td");
+  let nameTd = document.createElement("td");
+  let emailTd = document.createElement("td");
+  let ageTd = document.createElement("td");
+  let addressTd = document.createElement("td");
+  let editTd = document.createElement("td");
+  let deleteTd = document.createElement("td");
+
+  let editButton = document.createElement("button");
+  let deleteButton = document.createElement("button");
+
+  editButton.innerHTML = "Edit";
+  deleteButton.innerHTML = "Delete";
+  editButton.className = "button";
+  deleteButton.className = "button";
+
+  editTd.appendChild(editButton);
+  deleteTd.appendChild(deleteButton);
+
+  idTd.innerHTML = user.id;
+  nameTd.innerHTML = user.name;
+  emailTd.innerHTML = user.email;
+  ageTd.innerHTML = user.age;
+  addressTd.innerHTML = user.address;
+
+  tableRow.appendChild(idTd);
+  tableRow.appendChild(nameTd);
+  tableRow.appendChild(emailTd);
+  tableRow.appendChild(ageTd);
+  tableRow.appendChild(addressTd);
+  tableRow.appendChild(editTd);
+  tableRow.appendChild(deleteTd);
+
+  tableBody.appendChild(tableRow);
+};
+
+const addUserToJSON = (user) => {
+  let database = JSON.parse(localStorage.getItem("database"));
+  let users = database.users;
+  users.push(user);
+  localStorage.setItem("database", JSON.stringify({ ...database, users }));
+};
+
 getUsers().then((usersObj) => {
-  usersObj.forEach((user) => {
-    let tableRow = document.createElement("tr");
+  usersObj.forEach(addUserToTable);
+});
 
-    let idTd = document.createElement("td");
-    let nameTd = document.createElement("td");
-    let emailTd = document.createElement("td");
-    let ageTd = document.createElement("td");
-    let addressTd = document.createElement("td");
+let form = document.getElementById("form");
 
-    idTd.innerHTML = user.id;
-    nameTd.innerHTML = user.name;
-    emailTd.innerHTML = user.email;
-    ageTd.innerHTML = user.age;
-    addressTd.innerHTML = user.address;
+form.addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  let id = (Math.random() * 10).toString().replace(".", "").substr(0, 10);
+  let name = ev.target.name.value;
+  let email = ev.target.email.value;
+  let age = ev.target.age.value;
+  let address = ev.target.address.value;
 
-    tableRow.appendChild(idTd);
-    tableRow.appendChild(nameTd);
-    tableRow.appendChild(emailTd);
-    tableRow.appendChild(ageTd);
-    tableRow.appendChild(addressTd);
+  let user = { id, name, email, age, address };
 
-    tableBody.appendChild(tableRow);
-  });
+  addUserToTable(user);
+  addUserToJSON(user);
+
+  form.reset();
 });

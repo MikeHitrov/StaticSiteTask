@@ -53,11 +53,6 @@ let tableBody = document
   .getElementById("usersTable")
   .getElementsByTagName("tbody")[0];
 
-const getUsers = async () => {
-  let usersJSON = localStorage.getItem("database") || database;
-  return JSON.parse(usersJSON).users;
-};
-
 const addUserToTable = (user) => {
   let tableRow = document.createElement("tr");
 
@@ -109,10 +104,9 @@ const addUserToTable = (user) => {
 };
 
 const addUserToJSON = (user) => {
-  let database = getDb();
-  let users = database.users;
+  let users = getUsers();
   users.push(user);
-  localStorage.setItem("database", JSON.stringify({ ...database, users }));
+  localStorage.setItem("database", JSON.stringify({ getDatabase(), users }));
 };
 
 getUsers().then((usersObj) => {
@@ -126,7 +120,7 @@ form.addEventListener("submit", (ev) => {
 
   let id = ev.target.id.value;
 
-  let newId = (Math.random() * 10).toString().replace(".", "").substr(0, 10);
+  let newUserId = (Math.random() * 10).toString().replace(".", "").substr(0, 10);
   let name = ev.target.name.value;
   let email = ev.target.email.value;
   let age = ev.target.age.value;
@@ -145,7 +139,7 @@ form.addEventListener("submit", (ev) => {
       "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed."
     );
   } else {
-    let user = { id: id || newId, name, email, age, address };
+    let user = { id: id || newUserId, name, email, age, address };
 
     if (id) {
       editUser(user);
@@ -160,7 +154,7 @@ form.addEventListener("submit", (ev) => {
 
 const loadUserToForm = (user) => {
   //Loads the data from the local storage, because the form doesn't update until the page is refreshed.
-  let userData = getDb().users.find((u) => u.id === user.id);
+  let userData = getUsers().find((u) => u.id === user.id);
 
   form.id.value = userData.id;
   form.name.value = userData.name;
@@ -171,7 +165,7 @@ const loadUserToForm = (user) => {
 
 const editUser = (user) => {
   let database = getDb();
-  let users = database.users;
+  let users = getUsers();
 
   let userIndex = users.findIndex((u) => {
     return user.id === u.id;
@@ -191,8 +185,12 @@ const editUser = (user) => {
   }
 };
 
-const getDb = () => {
+const getDatabase = () => {
   return JSON.parse(localStorage.getItem("database"));
+}
+
+const getUsers = () => {
+  return JSON.parse(localStorage.getItem("database")).users;
 };
 
 const deleteUser = (user) => {
@@ -201,8 +199,7 @@ const deleteUser = (user) => {
   if (deleteModal) {
     tableBody.removeChild(trMap[user.id].row);
 
-    let database = getDb();
-    let users = database.users.filter((u) => u.id !== user.id);
-    localStorage.setItem("database", JSON.stringify({ ...database, users }));
+    let users = getUsers().filter((u) => u.id !== user.id);
+    localStorage.setItem("database", JSON.stringify({ getDatabase(), users }));
   }
 };

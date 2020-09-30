@@ -38,20 +38,30 @@ let database = `{
     ]
 }`;
 
+if (!localStorage.getItem("database")) {
+  localStorage.setItem("database", database);
+}
+
 //Using this object as a reference to the table rows.
 let trMap = {};
+
+let tableBody = document
+  .getElementById("usersTable")
+  .getElementsByTagName("tbody")[0];
+
+let form = document.getElementById("form");
 
 const nameRegex = /[A-za-z]{1,30}/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const addressRegex = /\w{1,300}/;
 
-if (!localStorage.getItem("database")) {
-  localStorage.setItem("database", database);
+const getDatabase = () => {
+  return JSON.parse(localStorage.getItem("database"));
 }
 
-let tableBody = document
-  .getElementById("usersTable")
-  .getElementsByTagName("tbody")[0];
+const getUsers = () => {
+  return JSON.parse(localStorage.getItem("database")).users;
+};
 
 const addUserToTable = (user) => {
   let tableRow = document.createElement("tr");
@@ -69,11 +79,11 @@ const addUserToTable = (user) => {
 
   editButton.innerHTML = "Edit";
   editButton.className = "button";
-  editButton.addEventListener("click", () => loadUserToForm(user));
+  editButton.id = "editButton";
 
   deleteButton.innerHTML = "Delete";
   deleteButton.className = "button";
-  deleteButton.addEventListener("click", () => deleteUser(user));
+  deleteButton.id = "deleteButton"
 
   editTd.appendChild(editButton);
   deleteTd.appendChild(deleteButton);
@@ -103,17 +113,34 @@ const addUserToTable = (user) => {
   };
 };
 
+getUsers().forEach((usersObj) => {
+  addUserToTable(usersObj);
+});
+
+document.getElementById("usersTable").onclick = (event) => {
+
+  if (event.target.id !== "editButton" && event.target.id == "deleteButton") {
+    return;
+  }
+
+  let userId = event.target.parentElement.parentElement.children[0].innerHTML;
+  let user = getUsers().find(u => u.id === userId)
+
+  if (event.target.id == "editButton") {
+    loadUserToForm(user);
+  } else if (event.target.id == "deleteButton") {
+    deleteUser(user);
+  }
+}
+
 const addUserToJSON = (user) => {
   let users = getUsers();
   users.push(user);
-  localStorage.setItem("database", JSON.stringify({ getDatabase(), users }));
+  localStorage.setItem("database", JSON.stringify({
+    ...getDatabase(),
+    users
+  }));
 };
-
-getUsers().then((usersObj) => {
-  usersObj.forEach(addUserToTable);
-});
-
-let form = document.getElementById("form");
 
 form.addEventListener("submit", (ev) => {
   ev.preventDefault();
@@ -139,7 +166,13 @@ form.addEventListener("submit", (ev) => {
       "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed."
     );
   } else {
-    let user = { id: id || newUserId, name, email, age, address };
+    let user = {
+      id: id || newUserId,
+      name,
+      email,
+      age,
+      address
+    };
 
     if (id) {
       editUser(user);
@@ -161,10 +194,12 @@ const loadUserToForm = (user) => {
   form.email.value = userData.email;
   form.age.value = userData.age;
   form.address.value = userData.address;
+
+  form.scrollIntoView();
 };
 
 const editUser = (user) => {
-  let database = getDb();
+  let database = getDatabase();
   let users = getUsers();
 
   let userIndex = users.findIndex((u) => {
@@ -173,7 +208,10 @@ const editUser = (user) => {
 
   if (userIndex > -1) {
     users[userIndex] = user;
-    localStorage.setItem("database", JSON.stringify({ ...database, users }));
+    localStorage.setItem("database", JSON.stringify({
+      ...database,
+      users
+    }));
     const userObject = trMap[user.id];
 
     userObject.name.innerHTML = user.name;
@@ -185,14 +223,6 @@ const editUser = (user) => {
   }
 };
 
-const getDatabase = () => {
-  return JSON.parse(localStorage.getItem("database"));
-}
-
-const getUsers = () => {
-  return JSON.parse(localStorage.getItem("database")).users;
-};
-
 const deleteUser = (user) => {
   let deleteModal = confirm(`Do you want to delete user ${user.name}?`);
 
@@ -200,6 +230,9 @@ const deleteUser = (user) => {
     tableBody.removeChild(trMap[user.id].row);
 
     let users = getUsers().filter((u) => u.id !== user.id);
-    localStorage.setItem("database", JSON.stringify({ getDatabase(), users }));
+    localStorage.setItem("database", JSON.stringify({
+      ...getDatabase(),
+      users
+    }));
   }
 };

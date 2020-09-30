@@ -1,123 +1,151 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 #navbar {
-    position: fixed;
-    top: 0%;
-    overflow: hidden;
-    background-color: #333;
-    list-style-type: none;
-    width: 100%;
-    height: 4rem;
+  position: fixed;
+  top: 0%;
+  overflow: hidden;
+  background-color: #333;
+  list-style-type: none;
+  width: 100%;
+  height: 4rem;
 }
-  
+
 #navbar a {
-    float: right;
-    display: block;
-    color: #F2F2F2;
-    text-align: center;
-    padding: 1rem 1rem;
-    text-decoration: none;
-    font-size: 1.5rem;
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
-  
+
 #navbar a:hover {
-    background-color: #DDD;
-    color: black;
+  background-color: #ddd;
+  color: black;
 }
-  
+
 #navbar a.active {
-    background-color: #4CAF50;
-    color: #FFFFFF;
+  background-color: #4caf50;
+  color: #ffffff;
 }
 
-#logo { 
-    display: inline-block;
-    width: 4rem;
-    height: 2rem;
+#logo {
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
 }
 
-main{
-    margin-top: 4rem;
+main {
+  margin-top: 4rem;
 }
 
 .article {
-    border-style: outset;
-    text-align: center;
-    color: #000000;  
-    font-size: 2rem;
+  border-style: outset;
+  text-align: center;
+  color: #000000;
+  font-size: 2rem;
 }
 
 .article > img {
-    width: 25rem;
-    height: 25rem;
-    border-radius: 3rem;  
+  width: 25rem;
+  height: 25rem;
+  border-radius: 3rem;
 }
 
 .openSideNav {
-    background-color: #333;
-    color: #DDD;
-    cursor: pointer;
-    width: 100%;
-    border: none;
-    text-align: center;
-    outline: none;
-    font-size: 1.5rem;
+  background-color: #333;
+  color: #ddd;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 1.5rem;
 }
 
 .content {
-    padding: 0 1.5rem;
-    display: none;
-    overflow: hidden;
-    background-color: #DDD;
-    color: #000000;
-    font-size: 2rem;
-    text-align: center;
-} 
+  padding: 0 1.5rem;
+  display: none;
+  overflow: hidden;
+  background-color: #ddd;
+  color: #000000;
+  font-size: 2rem;
+  text-align: center;
+}
 
 .sideNav {
-    height: 100vh;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #0084FF;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #0084ff;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
 }
 
 .sideNav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #FFFFFF;
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
 }
 
 .sideNav .closeBtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    background-color: transparent;
-    border: none;
-    color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+#usersTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#usersTable td,
+#usersTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#usersTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#usersTable tr:hover {
+  background-color: #ddd;
+}
+
+#usersTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4caf50;
+  color: white;
 }
 
 footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: #f2f2f2;
-    text-align: center;
- }
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+}

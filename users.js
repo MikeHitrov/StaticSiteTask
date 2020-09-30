@@ -41,6 +41,10 @@ let database = `{
 //Using this object as a reference to the table rows.
 let trMap = {};
 
+const nameRegex = /[A-za-z]{1,30}/;
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const addressRegex = /\w{1,300}/;
+
 if (!localStorage.getItem("database")) {
   localStorage.setItem("database", database);
 }
@@ -119,6 +123,7 @@ let form = document.getElementById("form");
 
 form.addEventListener("submit", (ev) => {
   ev.preventDefault();
+
   let id = ev.target.id.value;
 
   let newId = (Math.random() * 10).toString().replace(".", "").substr(0, 10);
@@ -127,16 +132,30 @@ form.addEventListener("submit", (ev) => {
   let age = ev.target.age.value;
   let address = ev.target.address.value;
 
-  let user = { id: id || newId, name, email, age, address };
-
-  if (id) {
-    editUser(user);
+  if (!nameRegex.test(name)) {
+    alert(
+      "Name should be between 1-30 characters, uppercase and lowercase letters and space are allowed."
+    );
+  } else if (!emailRegex.test(email)) {
+    alert("Email should be valid.");
+  } else if (age < 0 || age > 150) {
+    alert("Age should be between 0-150.");
+  } else if (!addressRegex.test(address)) {
+    alert(
+      "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed."
+    );
   } else {
-    addUserToTable(user);
-    addUserToJSON(user);
-  }
+    let user = { id: id || newId, name, email, age, address };
 
-  form.reset();
+    if (id) {
+      editUser(user);
+    } else {
+      addUserToTable(user);
+      addUserToJSON(user);
+    }
+
+    form.reset();
+  }
 });
 
 const loadUserToForm = (user) => {

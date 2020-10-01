@@ -42,9 +42,6 @@ if (!localStorage.getItem("database")) {
   localStorage.setItem("database", database);
 }
 
-//Using this object as a reference to the table rows.
-let trMap = {};
-
 let tableBody = document
   .getElementById("usersTable")
   .getElementsByTagName("tbody")[0];
@@ -57,15 +54,18 @@ const addressRegex = /\w{1,300}/;
 
 const getDatabase = () => {
   return JSON.parse(localStorage.getItem("database"));
-}
+};
 
 const getUsers = () => {
   return JSON.parse(localStorage.getItem("database")).users;
 };
 
 const sanitize = (string) => {
-  return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-}
+  return string
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/"/g, "&quot;");
+};
 
 const addUserToTable = (user) => {
   let tableRow = document.createElement("tr");
@@ -87,7 +87,7 @@ const addUserToTable = (user) => {
 
   deleteButton.innerHTML = "Delete";
   deleteButton.className = "button";
-  deleteButton.id = "deleteButton"
+  deleteButton.id = "deleteButton";
 
   editTd.appendChild(editButton);
   deleteTd.appendChild(deleteButton);
@@ -106,15 +106,9 @@ const addUserToTable = (user) => {
   tableRow.appendChild(editTd);
   tableRow.appendChild(deleteTd);
 
-  tableBody.appendChild(tableRow);
+  tableRow.id = user.id;
 
-  trMap[user.id] = {
-    name: nameTd,
-    email: emailTd,
-    age: ageTd,
-    address: addressTd,
-    row: tableRow,
-  };
+  tableBody.appendChild(tableRow);
 };
 
 getUsers().forEach((usersObj) => {
@@ -122,27 +116,31 @@ getUsers().forEach((usersObj) => {
 });
 
 document.getElementById("usersTable").onclick = (event) => {
-  if (event.target.id !== "editButton" && event.target.id == "deleteButton") {
+  if (event.target.id !== "editButton" && event.target.id !== "deleteButton") {
     return;
   }
 
   let userId = event.target.parentElement.parentElement.children[0].innerHTML;
-  let user = getUsers().find(u => u.id === userId)
+  let user = getUsers().find((u) => u.id === userId);
 
   if (event.target.id == "editButton") {
     loadUserToForm(user);
   } else if (event.target.id == "deleteButton") {
+    console.log(1);
     deleteUser(user);
   }
-}
+};
 
 const addUserToJSON = (user) => {
   let users = getUsers();
   users.push(user);
-  localStorage.setItem("database", JSON.stringify({
-    ...getDatabase(),
-    users
-  }));
+  localStorage.setItem(
+    "database",
+    JSON.stringify({
+      ...getDatabase(),
+      users,
+    })
+  );
 };
 
 form.addEventListener("submit", (ev) => {
@@ -150,7 +148,10 @@ form.addEventListener("submit", (ev) => {
 
   let id = ev.target.id.value;
 
-  let newUserId = (Math.random() * 10).toString().replace(".", "").substr(0, 10);
+  let newUserId = (Math.random() * 10)
+    .toString()
+    .replace(".", "")
+    .substr(0, 10);
   let name = ev.target.name.value;
   let email = ev.target.email.value;
   let age = ev.target.age.value;
@@ -174,7 +175,7 @@ form.addEventListener("submit", (ev) => {
       name,
       email,
       age,
-      address
+      address,
     };
 
     if (id) {
@@ -204,6 +205,7 @@ const loadUserToForm = (user) => {
 const editUser = (user) => {
   let database = getDatabase();
   let users = getUsers();
+  let userRow = document.getElementById(user.id).children;
 
   let userIndex = users.findIndex((u) => {
     return user.id === u.id;
@@ -211,16 +213,18 @@ const editUser = (user) => {
 
   if (userIndex > -1) {
     users[userIndex] = user;
-    localStorage.setItem("database", JSON.stringify({
-      ...database,
-      users
-    }));
-    const userObject = trMap[user.id];
+    localStorage.setItem(
+      "database",
+      JSON.stringify({
+        ...database,
+        users,
+      })
+    );
 
-    userObject.name.innerHTML = user.name;
-    userObject.email.innerHTML = user.email;
-    userObject.age.innerHTML = user.age;
-    userObject.address.innerHTML = user.address;
+    userRow[1].innerHTML = sanitize(user.name);
+    userRow[2].innerHTML = sanitize(user.email);
+    userRow[3].innerHTML = sanitize(user.age.toString());
+    userRow[4].innerHTML = sanitize(user.address);
   } else {
     alert("No user found.");
   }
@@ -230,12 +234,15 @@ const deleteUser = (user) => {
   let deleteModal = confirm(`Do you want to delete user ${user.name}?`);
 
   if (deleteModal) {
-    tableBody.removeChild(trMap[user.id].row);
+    tableBody.removeChild(document.getElementById(user.id));
 
     let users = getUsers().filter((u) => u.id !== user.id);
-    localStorage.setItem("database", JSON.stringify({
-      ...getDatabase(),
-      users
-    }));
+    localStorage.setItem(
+      "database",
+      JSON.stringify({
+        ...getDatabase(),
+        users,
+      })
+    );
   }
 };

@@ -48,7 +48,7 @@ let tableBody = document
 
 let form = document.getElementById("form");
 
-const nameRegex = /[A-za-z]{1,30}/;
+const nameRegex = /[A-za-z ]{1,30}/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const addressRegex = /\w{1,300}/;
 
@@ -157,19 +157,46 @@ form.addEventListener("submit", (ev) => {
   let age = ev.target.age.value;
   let address = ev.target.address.value;
 
-  if (!nameRegex.test(name)) {
-    alert(
-      "Name should be between 1-30 characters, uppercase and lowercase letters and space are allowed."
-    );
-  } else if (!emailRegex.test(email)) {
-    alert("Email should be valid.");
-  } else if (age < 0 || age > 150) {
-    alert("Age should be between 0-150.");
-  } else if (!addressRegex.test(address)) {
-    alert(
-      "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed."
-    );
+  let nameError = document.getElementById("nameError");
+  let emailError = document.getElementById("emailError");
+  let ageError = document.getElementById("ageError");
+  let addressError = document.getElementById("addressError");
+
+  if (
+    !nameRegex.test(name) ||
+    !emailRegex.test(email) ||
+    age < 0 ||
+    age > 150 ||
+    !addressRegex.test(address)
+  ) {
+    if (!nameRegex.test(name)) {
+      nameError.innerHTML =
+        "Name should be between 1-30 characters, uppercase and lowercase letters and space are allowed.";
+    } else {
+      nameError.innerHTML = "";
+    }
+    if (!emailRegex.test(email)) {
+      emailError.innerHTML = "Email should be valid.";
+    } else{
+      emailError.innerHTML = "";
+    }
+    if (age < 0 || age > 150 || age.toString() === "") {
+      ageError.innerHTML = "Age should be between 0-150.";
+    } else{
+      ageError.innerHTML = "";
+    }
+    if (!addressRegex.test(address)) {
+      addressError.innerHTML =
+        "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed.";
+    }else{
+      addressError.innerHTML = "";
+    }
   } else {
+    nameError.innerHTML = "";
+    emailError.innerHTML = "";
+    ageError.innerHTML = "";
+    addressError.innerHTML = "";
+
     let user = {
       id: id || newUserId,
       name,

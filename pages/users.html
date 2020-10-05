@@ -8,15 +8,33 @@
   <body>
     <div class="form-wrapper">
       <form id="form">
-        <input type="hidden" name="id">
+        <input type="hidden" name="id" />
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" /><span id="nameError" class="error-message"></span><br/>
+        <input type="text" id="name" name="name" /><span
+          id="nameError"
+          class="error-message"
+          >Name should be between 1-30 characters, uppercase and lowercase
+          letters and space are allowed.</span
+        ><br />
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" /><span id="emailError" class="error-message"></span><br/>
+        <input type="text" id="email" name="email" /><span
+          id="emailError"
+          class="error-message"
+          >Email should be valid.</span
+        ><br />
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" /><span id="ageError" class="error-message"></span><br/>
+        <input type="number" id="age" name="age" /><span
+          id="ageError"
+          class="error-message"
+          >Age should be between 0-150.</span
+        ><br />
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address" /><span id="addressError" class="error-message"></span><br/>
+        <input type="text" id="address" name="address" /><span
+          id="addressError"
+          class="error-message"
+          >Address should be betweeen 1-300 characters and uppercase, lowercase,
+          numbers, space are allowed.</span
+        ><br />
         <button class="submit-button" type="submit">Submit</button>
         <button class="submit-button" type="reset">Reset form</button>
       </form>

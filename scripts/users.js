@@ -126,7 +126,6 @@ document.getElementById("usersTable").onclick = (event) => {
   if (event.target.id == "editButton") {
     loadUserToForm(user);
   } else if (event.target.id == "deleteButton") {
-    console.log(1);
     deleteUser(user);
   }
 };
@@ -170,33 +169,26 @@ form.addEventListener("submit", (ev) => {
     !addressRegex.test(address)
   ) {
     if (!nameRegex.test(name)) {
-      nameError.innerHTML =
-        "Name should be between 1-30 characters, uppercase and lowercase letters and space are allowed.";
+      nameError.style.display = "block";
     } else {
-      nameError.innerHTML = "";
+      nameError.style.display = "none";
     }
     if (!emailRegex.test(email)) {
-      emailError.innerHTML = "Email should be valid.";
-    } else{
-      emailError.innerHTML = "";
+      emailError.style.display = "block";
+    } else {
+      emailError.style.display = "none";
     }
     if (age < 0 || age > 150 || age.toString() === "") {
-      ageError.innerHTML = "Age should be between 0-150.";
-    } else{
-      ageError.innerHTML = "";
+      ageError.style.display = "block";
+    } else {
+      ageError.style.display = "none";
     }
     if (!addressRegex.test(address)) {
-      addressError.innerHTML =
-        "Address should be betweeen 1-300 characters and uppercase, lowercase, numbers, space are allowed.";
-    }else{
-      addressError.innerHTML = "";
+      addressError.style.display = "block";
+    } else {
+      addressError.style.display = "none";
     }
   } else {
-    nameError.innerHTML = "";
-    emailError.innerHTML = "";
-    ageError.innerHTML = "";
-    addressError.innerHTML = "";
-
     let user = {
       id: id || newUserId,
       name,
@@ -206,15 +198,44 @@ form.addEventListener("submit", (ev) => {
     };
 
     if (id) {
+      resetForm(ev);
       editUser(user);
     } else {
+      resetForm(ev);
       addUserToTable(user);
       addUserToJSON(user);
     }
-
-    form.reset();
   }
 });
+
+form.addEventListener("reset", (ev) => {
+  ev.preventDefault();
+  resetForm(ev);
+});
+
+const resetForm = (ev) => {
+  let id = ev.target.id;
+  let name = ev.target.name;
+  let email = ev.target.email;
+  let age = ev.target.age;
+  let address = ev.target.address;
+
+  let nameError = document.getElementById("nameError");
+  let emailError = document.getElementById("emailError");
+  let ageError = document.getElementById("ageError");
+  let addressError = document.getElementById("addressError");
+
+  nameError.style.display = "none";
+  emailError.style.display = "none";
+  ageError.style.display = "none";
+  addressError.style.display = "none";
+
+  name.value = "";
+  email.value = "";
+  age.value = "";
+  address.value = "";
+  id.value = "";
+};
 
 const loadUserToForm = (user) => {
   //Loads the data from the local storage, because the form doesn't update until the page is refreshed.

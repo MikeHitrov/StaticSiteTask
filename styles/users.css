@@ -71,4 +71,5 @@ input {
 .error-message {
   background-color: #fce4e4;
   border: 0.1rem solid #fcc2c3;
+  display: none;
 }

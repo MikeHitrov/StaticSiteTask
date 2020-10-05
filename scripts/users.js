@@ -83,11 +83,13 @@ const addUserToTable = (user) => {
 
   editButton.innerHTML = "Edit";
   editButton.className = "button";
-  editButton.id = "editButton";
+  editButton.name = "editButton";
+  editButton.id = sanitize(user.id);
 
   deleteButton.innerHTML = "Delete";
   deleteButton.className = "button";
-  deleteButton.id = "deleteButton";
+  deleteButton.name = "deleteButton";
+  deleteButton.id = sanitize(user.id);
 
   editTd.appendChild(editButton);
   deleteTd.appendChild(deleteButton);
@@ -116,16 +118,19 @@ getUsers().forEach((usersObj) => {
 });
 
 document.getElementById("usersTable").onclick = (event) => {
-  if (event.target.id !== "editButton" && event.target.id !== "deleteButton") {
+  if (
+    event.target.name !== "editButton" &&
+    event.target.name !== "deleteButton"
+  ) {
     return;
   }
 
-  let userId = event.target.parentElement.parentElement.children[0].innerHTML;
+  let userId = event.target.id;
   let user = getUsers().find((u) => u.id === userId);
 
-  if (event.target.id == "editButton") {
+  if (event.target.name == "editButton") {
     loadUserToForm(user);
-  } else if (event.target.id == "deleteButton") {
+  } else if (event.target.name == "deleteButton") {
     deleteUser(user);
   }
 };

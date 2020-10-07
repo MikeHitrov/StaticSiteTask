@@ -48,11 +48,22 @@ let tableBody = document
 
 let form = document.getElementById("form");
 
+const validators = [];
+
+const registerValidator = (validator) => {
+  validators.push(validator);
+};
+
+const validateUserDetails = (form) => {
+  validators.forEach((validator) => validator && validator(form));
+};
+
 const nameRegex = /[A-za-z ]{1,30}/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const addressRegex = /\w{1,300}/;
 
-const validateName = (name) => {
+const nameValidator = (form) => {
+  let name = form.name.value;
   let nameError = document.getElementById("nameError");
 
   if (!nameRegex.test(name)) {
@@ -64,7 +75,8 @@ const validateName = (name) => {
   return nameRegex.test(name);
 };
 
-const validateEmail = (email) => {
+const emailValidator = (form) => {
+  let email = form.email.value;
   let emailError = document.getElementById("emailError");
 
   if (!emailRegex.test(email)) {
@@ -76,7 +88,8 @@ const validateEmail = (email) => {
   return emailRegex.test(email);
 };
 
-const validateAge = (age) => {
+const ageValidator = (form) => {
+  let age = form.age.value;
   let ageError = document.getElementById("ageError");
 
   if (age < 0 || age > 150 || age.toString() === "") {
@@ -88,7 +101,8 @@ const validateAge = (age) => {
   return age > 0 || age < 150 || age.toString() !== "";
 };
 
-const validateAddress = (address) => {
+const addressValidator = (form) => {
+  let address = form.address.value;
   let addressError = document.getElementById("addressError");
 
   if (!addressRegex.test(address)) {
@@ -99,6 +113,11 @@ const validateAddress = (address) => {
 
   return addressRegex.test(address);
 };
+
+registerValidator(nameValidator);
+registerValidator(emailValidator);
+registerValidator(ageValidator);
+registerValidator(addressValidator);
 
 const getDatabase = () => {
   return JSON.parse(localStorage.getItem("database"));
@@ -203,21 +222,9 @@ form.addEventListener("submit", (ev) => {
     .toString()
     .replace(".", "")
     .substr(0, 10);
-  let name = ev.target.name.value;
-  let email = ev.target.email.value;
-  let age = ev.target.age.value;
-  let address = ev.target.address.value;
 
-  if (
-    !validateName(name) ||
-    !validateEmail(email) ||
-    !validateAge(age) ||
-    !validateAddress(address)
-  ) {
-    validateName(name);
-    validateEmail(email);
-    validateAge(age);
-    validateAddress(address);
+  if (!validateUserDetails(ev.target)) {
+    validateUserDetails(ev.target);
   } else {
     let user = {
       id: id || newUserId,

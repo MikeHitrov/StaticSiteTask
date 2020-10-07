@@ -52,6 +52,54 @@ const nameRegex = /[A-za-z ]{1,30}/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const addressRegex = /\w{1,300}/;
 
+const validateName = (name) => {
+  let nameError = document.getElementById("nameError");
+
+  if (!nameRegex.test(name)) {
+    nameError.style.display = "block";
+  } else {
+    nameError.style.display = "none";
+  }
+
+  return nameRegex.test(name);
+};
+
+const validateEmail = (email) => {
+  let emailError = document.getElementById("emailError");
+
+  if (!emailRegex.test(email)) {
+    emailError.style.display = "block";
+  } else {
+    emailError.style.display = "none";
+  }
+
+  return emailRegex.test(email);
+};
+
+const validateAge = (age) => {
+  let ageError = document.getElementById("ageError");
+
+  if (age < 0 || age > 150 || age.toString() === "") {
+    ageError.style.display = "block";
+  } else {
+    ageError.style.display = "none";
+  }
+
+  return age > 0 || age < 150 || age.toString() !== "";
+};
+
+const validateAddress = (address) => {
+  let addressError = document.getElementById("addressError");
+
+  if (!addressRegex.test(address)) {
+    addressError.style.display = "block";
+  } else {
+    addressError.style.display = "none";
+  }
+
+  return addressRegex.test(address);
+};
+
 const getDatabase = () => {
   return JSON.parse(localStorage.getItem("database"));
 };
@@ -151,7 +199,6 @@ form.addEventListener("submit", (ev) => {
   ev.preventDefault();
 
   let id = ev.target.id.value;
-
   let newUserId = (Math.random() * 10)
     .toString()
     .replace(".", "")
@@ -161,38 +208,16 @@ form.addEventListener("submit", (ev) => {
   let age = ev.target.age.value;
   let address = ev.target.address.value;
 
-  let nameError = document.getElementById("nameError");
-  let emailError = document.getElementById("emailError");
-  let ageError = document.getElementById("ageError");
-  let addressError = document.getElementById("addressError");
-
   if (
-    !nameRegex.test(name) ||
-    !emailRegex.test(email) ||
-    age < 0 ||
-    age > 150 ||
-    !addressRegex.test(address)
+    !validateName(name) ||
+    !validateEmail(email) ||
+    !validateAge(age) ||
+    !validateAddress(address)
   ) {
-    if (!nameRegex.test(name)) {
-      nameError.style.display = "block";
-    } else {
-      nameError.style.display = "none";
-    }
-    if (!emailRegex.test(email)) {
-      emailError.style.display = "block";
-    } else {
-      emailError.style.display = "none";
-    }
-    if (age < 0 || age > 150 || age.toString() === "") {
-      ageError.style.display = "block";
-    } else {
-      ageError.style.display = "none";
-    }
-    if (!addressRegex.test(address)) {
-      addressError.style.display = "block";
-    } else {
-      addressError.style.display = "none";
-    }
+    validateName(name);
+    validateEmail(email);
+    validateAge(age);
+    validateAddress(address);
   } else {
     let user = {
       id: id || newUserId,

@@ -38,8 +38,20 @@ let database = `{
     ]
 }`;
 
-if (!localStorage.getItem("database")) {
+const updateDatabase = (database) => {
   localStorage.setItem("database", database);
+};
+
+const getDatabase = () => {
+  return JSON.parse(localStorage.getItem("database"));
+};
+
+const getUsers = () => {
+  return JSON.parse(localStorage.getItem("database")).users;
+};
+
+if (!getDatabase()) {
+  updateDatabase(database);
 }
 
 let tableBody = document
@@ -55,7 +67,7 @@ const registerValidator = (validator) => {
 };
 
 const validateUserDetails = (form) => {
-  validators.forEach((validator) => validator && validator(form));
+  return validators.every((validator) => validator && validator(form));
 };
 
 const nameRegex = /[A-za-z ]{1,30}/;
@@ -118,14 +130,6 @@ registerValidator(nameValidator);
 registerValidator(emailValidator);
 registerValidator(ageValidator);
 registerValidator(addressValidator);
-
-const getDatabase = () => {
-  return JSON.parse(localStorage.getItem("database"));
-};
-
-const getUsers = () => {
-  return JSON.parse(localStorage.getItem("database")).users;
-};
 
 const sanitize = (string) => {
   return string
@@ -205,8 +209,7 @@ document.getElementById("usersTable").onclick = (event) => {
 const addUserToJSON = (user) => {
   let users = getUsers();
   users.push(user);
-  localStorage.setItem(
-    "database",
+  updateDatabase(
     JSON.stringify({
       ...getDatabase(),
       users,
@@ -222,6 +225,10 @@ form.addEventListener("submit", (ev) => {
     .toString()
     .replace(".", "")
     .substr(0, 10);
+  let name = ev.target.name.value;
+  let email = ev.target.email.value;
+  let age = ev.target.age.value;
+  let address = ev.target.address.value;
 
   if (!validateUserDetails(ev.target)) {
     validateUserDetails(ev.target);
@@ -234,11 +241,11 @@ form.addEventListener("submit", (ev) => {
       address,
     };
 
+    resetForm(ev);
+
     if (id) {
-      resetForm(ev);
       editUser(user);
     } else {
-      resetForm(ev);
       addUserToTable(user);
       addUserToJSON(user);
     }
@@ -288,7 +295,6 @@ const loadUserToForm = (user) => {
 };
 
 const editUser = (user) => {
-  let database = getDatabase();
   let users = getUsers();
   let userRow = document.getElementById(user.id).children;
 
@@ -298,10 +304,9 @@ const editUser = (user) => {
 
   if (userIndex > -1) {
     users[userIndex] = user;
-    localStorage.setItem(
-      "database",
+    updateDatabase(
       JSON.stringify({
-        ...database,
+        ...getDatabase(),
         users,
       })
     );
@@ -322,8 +327,7 @@ const deleteUser = (user) => {
     tableBody.removeChild(document.getElementById(user.id));
 
     let users = getUsers().filter((u) => u.id !== user.id);
-    localStorage.setItem(
-      "database",
+    updateDatabase(
       JSON.stringify({
         ...getDatabase(),
         users,

@@ -1,0 +1,123 @@
+body {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#navbar {
+  position: fixed;
+  top: 0%;
+  overflow: hidden;
+  background-color: #333;
+  list-style-type: none;
+  width: 100%;
+  height: 4rem;
+}
+
+#navbar a {
+  float: right;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 1rem 1rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+#logo {
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
+}
+
+main {
+  margin-top: 4rem;
+}
+
+.article {
+  border-style: outset;
+  text-align: center;
+  color: #000000;
+  font-size: 2rem;
+}
+
+.article > img {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 3rem;
+}
+
+.openSideNav {
+  background-color: #333;
+  color: #ddd;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 1.5rem;
+}
+
+.content {
+  padding: 0 1.5rem;
+  display: none;
+  overflow: hidden;
+  background-color: #ddd;
+  color: #000000;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sideNav {
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #0084ff;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sideNav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+}
+
+.sideNav .closeBtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: #f2f2f2;
+  text-align: center;
+}

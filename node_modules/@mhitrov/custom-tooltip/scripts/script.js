@@ -32,5 +32,3 @@ function addTooltip(elementId, text, delayBeforeShow, delayAfterShow) {
     }, delayAfterShow);
   });
 }
-
-exports.addTooltip;

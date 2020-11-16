@@ -4,13 +4,13 @@
   },
   "name": "@mhitrov/customtooltip",
   "description": "Use addTooltip(elementId, textToDisplay, delayBeforeShowing, delayBeforeClosing) to add custom tooltip.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scripts": {
     "test": "npx cypress open"
   },
   "files": [
-    "./scripts/script.js",
-    "./styles/style.js"
+    "/scripts/script.js",
+    "/styles/style.css"
   ],
   "repository": {
     "type": "git",

@@ -1,4 +1,3 @@
-requirejs(["tooltip"], function (addTooltip) {
-  addTooltip.addTooltip("test", "test", 0, 0);
-  console.log(1);
-});
+var addTooltip = require('@mhitrov/customtooltip');
+
+console.log(addTooltip);

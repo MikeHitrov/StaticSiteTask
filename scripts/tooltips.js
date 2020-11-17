@@ -1,3 +1,14 @@
-var addTooltip = require('@mhitrov/customtooltip');
+var addTooltip = require("../node_modules/@mhitrov/customtooltip/scripts/script.js");
 
-console.log(addTooltip);
+addTooltip.addTooltip(
+  "submitButton",
+  "Use this button to submit the form",
+  0,
+  3000
+);
+addTooltip.addTooltip(
+  "resetButton",
+  "Use this button to reset the form",
+  0,
+  3000
+);

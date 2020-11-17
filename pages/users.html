@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <title>Users</title>
     <link rel="stylesheet" href="../styles/users.css" />
+    <link rel="stylesheet" href="../node_modules/@mhitrov/customtooltip/styles/style.css" />
   </head>
   <body>
+    <div id="tooltip"></div>
     <div class="form-wrapper">
       <form id="form">
         <input type="hidden" name="id" />
@@ -35,8 +37,8 @@
           >Address should be betweeen 1-300 characters and uppercase, lowercase,
           numbers, space are allowed.</span
         ><br />
-        <button id="test" class="submit-button" type="submit">Submit</button>
-        <button class="submit-button" type="reset">Reset form</button>
+        <button id="submitButton" class="submit-button" type="submit">Submit</button>
+        <button id="resetButton" class="submit-button" type="reset">Reset form</button>
       </form>
     </div>
     <table id="usersTable">
@@ -53,7 +55,7 @@
       </thead>
       <tbody></tbody>
     </table>
-    <script src="../scripts/tooltips.js"></script>
+    <script src="../scripts/bundle.js"></script>
     <script src="../scripts/users.js"></script>
   </body>
 </html>
